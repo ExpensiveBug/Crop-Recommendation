@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Sign Up{% endblock title %}</title>
+
+{% block content %}
+    <div class="row justify-content-center m-4">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 overflow-hidden">
+                <div class="row">
+                    <div class="col-md-6" style="background: url('{% static "images/signup.png" %}') no-repeat center center / cover;">  
+                    </div>
+                    <div class="col-md-6 bg-white">
+                        <div class="p-5">
+                            <h3><i class="mb-3 fa-solid fa-user-plus"></i> Create Account</h3>
+                            <form method = "post" id="signupform">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="form-label">Full Name</label>
+                                        <input type="text" name="name" class="form-control" placeholder="e.g. John William" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="form-label">Contact Number</label>
+                                        <input type="tel" name="contact" id="phone" placeholder = "e.g. 3421******" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="form-label">Email</label>
+                                        <input type="email" name="mail" id="email" placeholder = "you@example.com" class="form-control">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="form-label">Password<span class ="text-muted small">(min 6 characters) </span> </label>
+                                        <input type="password" name="password" id="pwd1" class="form-control" placeholder = "******" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="form-label">Confirm Password</label>
+                                        <input type="password" name="confirm" id="confirm" class="form-control" placeholder = "******" required>
+                                    </div> 
+                                    <div class="col-md-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" id="agree" class="form-check-input">
+                                            <label class="form-check-label">I agree to the <a href="">terms & Conditions</a></label>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <button class ="btn btn-success mt-3 w-100" type="submit" id="signupbtn">
+                                    <span>Create Account</span>
+                                </button>
+                                <div class="text-center mt-3 ">
+                                    <span class="text muted small">Already have an account ?</span>
+                                    <a href="{% url 'login-view' %}" class="small text-decoration-none ms-1"> Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>               
+        </div>
+    </div>
+{% endblock content %}
