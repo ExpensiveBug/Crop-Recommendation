@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Prediction{% endblock title %}</title>
+{% block content %}
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Crop Recommendation</h3>
+                    <div class="text-muted small d-none d-md-block">Enter numeric values (Humidity: 0-100 , pH : 0-14)</div>
+                </div>
+            </div>
+            <hr>
+            <form method = "post" id = "prediction-form">
+                {% csrf_token %}
+                <div class="row g-4">
+                    {% for f in feature_order %}
+                        <div class="col-md-4">
+                            <label class="form-label text-uppercase">{{f}}</label>
+                            {% if f == "humidity" %}
+                                <input type="number" min="0.0" max = "100.0" step = "any" id = "{{f}}" name="{{f}}" required class = "form-control" placeholder = "e.g. 79">
+                            {% elif f == "ph" %}
+                                <input type="number" min ="0" max="14" step = 0.1 id = "{{f}}" name="{{f}}" required class = "form-control" placeholder = "e.g. 5.7">
+                            {% else %}
+                                <input type="number" min="0.0" id = "{{f}}" name="{{f}}" step = "any" required class = "form-control" placeholder = "e.g. 60">
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class = "d-flex flex-wrap gap-2 mt-3">
+                    <button type = "submit" class = "btn btn-success">Predict</button>
+                    <button type = "button" class = "btn btn-outline-secondary" onclick ="fillSample()">Use Sample</button>
+                    <button type = "reset" class = "btn btn-danger">Reset</button>
+                </div>
+            </form>
+
+            {% if result %}
+            <hr>
+            <div class="alert alert-success">Recommended Crop : <strong>{{result|title}}</strong> </div>
+            {% endif %}
+
+            {% if input_data %}
+            <div class="small text-muted">
+                Inputs : 
+                {% for k,v in input_data.items %}
+                <code>{{k}} = {{v}}</code> {% if not forloop.last %} , {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% comment %} 11 {% endcomment %}
+<script>
+function fillSample() {
+    document.getElementById("N").value = 90;
+    document.getElementById("P").value = 42;
+    document.getElementById("K").value = 43;
+    document.getElementById("temperature").value = 20.5;
+    document.getElementById("humidity").value = 82;
+    document.getElementById("ph").value = 6.5;
+    document.getElementById("rainfall").value = 202;
+}
+</script>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Prediction{% endblock title %}</title>
+{% block content %}
+    <div class="text-center">
+        <h3><i class="fa-solid fa-seedling"></i> Prediction History</h3>
+    </div>
+    <form method="get" class="card card-body shadow-sm border-0 mb-3">
+        <div class="row g-2">
+            <div class="col-md-3">
+                <label class="form-label">Crop</label>
+                <select name="crop" id="crop" class=" form-select w-100">
+                    <option value="">All</option>
+                    {% for c in crops %}
+                        <option value="{{c}}" {% if c == current_crop %} selected {% endif %}>{{c|title}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Start Date</label>
+                <input type="date" name="start" value="{{start}}" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">End Date</label>
+                <input type="date" name="end" value="{{end}}" class="form-control">
+            </div>
+            <div class="col-md-2 d-flex align-items-end gap-2">
+                <button class = "btn btn-success w-100 d-flex align-items-center justify-content-center" type="submit"><i class="fa-solid fa-filter"></i> Apply</button>
+                <a href="{{request.path}}" class="btn btn-outline-secondary w-100 d-flex align-items-center justify-content-center"><i class = "fa-solid fa-rotate-right"></i> Clear</a>
+            </div>
+        </div>
+    </form>
+
+    <table class = "table">
+        <thead class = "table-success"> 
+            <tr>
+                <th>Prediction Date</th>
+                <th>User</th>
+                <th>Crop</th>
+                <th>N</th>
+                <th>P</th>
+                <th>K</th>
+                <th>Temprature</th>
+                <th>Humidity</th>
+                <th>pH</th>
+                <th>Rainfall</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in qs %}
+                <tr>
+                <td>{{p.created_at}}</td>
+                <td>{{p.user.username}}</td>
+                <td>{{p.predicted_label}}</td>
+                <td>{{p.N}}</td>
+                <td>{{p.P}}</td>
+                <td>{{p.K}}</td>
+                <td>{{p.temperature}}</td>
+                <td>{{p.humidity}}</td>
+                <td>{{p.ph}}</td>
+                <td>{{p.rainfall}}</td>
+                <td><a href="{% url 'admin-delete-prediction-view' p.id %}" class="btn btn-outline-danger" onclick = "return confirm('Are You Sure, You want to delete this entry ? This cannot be undone!')"> <i class ="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock content %}

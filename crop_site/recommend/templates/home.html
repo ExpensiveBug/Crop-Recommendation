@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Home{% endblock title %}</title>
+
+{% block content %}
+<section class="head  p-4 rounded-4 text-white ">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h2 class="display-6 fw-bold">Smart Crop Recommendation</h2>
+            <p class="lead text-white-50 mb-3">Smart farming starts with the right crop, this system analyzes soil and climate data to recommend the best crops for higher productivity and sustainable agriculture.</p>
+            <div class="d-flex gap-2 flex-wrap">
+                {% if user.is_authenticated and not user.is_staff %}
+                <a href="" class ="btn btn-outline-light">Start Prediction</a>
+                <a href="" class ="btn btn-outline-light">My History</a>
+
+                {% elif user.is_authenticated and user.is_staff %}  
+                <a href="" class ="btn btn-outline-light">Admin Dashboard</a>
+                <a href="" class ="btn btn-outline-light">View Prediction</a>
+
+                {% else %}
+                <a href="{% url 'login-view' %}" class ="btn btn-outline-light">User Login</a>
+                <a href="{% url 'signup-view' %}" class ="btn btn-outline-light">Create Account</a>
+                <a href="{% url 'admin-login-view' %}" class ="btn btn-outline-light">Admin Login</a>
+                {% endif %}
+            </div>
+            <div class="mt-2 text-white-50 small">Your Predictions saved privately in your account.</div>
+        </div>
+        <div class="col-lg-5 mt-4">
+            <img src="{% static "images/home.png" %}" style="max-height:350px;" class="img-fluid rounded-4 shadow-lg">
+        </div>
+    </div>
+    <div class="row g-3 m-4">
+        <div class="col-sm-6 col-lg-3">
+            <div class="user-info">
+                <div class="title">Users</div>
+                <div class="value">{{total_user}}</div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-lg-3">
+            <div class="pred-info">
+                <div class="title">Predictions</div>
+                <div class="value">{{total_prediction}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

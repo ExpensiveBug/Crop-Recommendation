@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Prediction{% endblock title %}</title>
+{% block content %}
+    <div class="row g-4">
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class = "mb-3">Edit Profile</h3>
+                <form method="POST" id="profile-form">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label >User Name </label>
+                            <div class="input-group">
+                                {% comment %} <input type="text" name="name" class="form-control" value="{{request.user.first_name}} {{request.user.last_name}}"> {% endcomment %}
+                                <input type="text" name="name" class="form-control" value="{{name}}">
+                            </div>
+                        </div>
+                        <label >Mobile Number </label>
+                        <div class="input-group">
+                            <input type="text" name="phone" class="form-control" value="{{user_profile.phone}}">
+                        </div>
+                        <small class="text-muted">{{request.user.username}}</small>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3 w-100" id="save-btn">Save Changes</button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+{% endblock content %}

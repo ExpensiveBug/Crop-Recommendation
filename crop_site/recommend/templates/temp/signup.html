@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+<div class="d-flex justify-content-center my-5 shadow" style="max-width: 900px; margin:auto; border-radius:10px; overflow:hidden;">
+
+    <div style="flex:1; background: url('{% static 'images/signup.png' %}') center/cover no-repeat; min-height:500px;">
+    </div>
+
+    <div style="flex:1; background:white; padding:40px;">
+        <h3 class="mb-4"><i class="fa-solid fa-user-plus"></i> Create Account</h3>
+
+        <form>
+            <input type="text" class="form-control mb-3" placeholder="Full Name">
+            <input type="tel" class="form-control mb-3" placeholder="Phone Number">
+            <input type="email" class="form-control mb-3" placeholder="Email">
+            <input type="password" class="form-control mb-3" placeholder="Password">
+            <input type="password" class="form-control mb-3" placeholder="Confirm Password">
+            <button type="submit" class="btn btn-success w-100">Create Account</button>
+        </form>
+    </div>
+
+</div>
+{% endblock content %}

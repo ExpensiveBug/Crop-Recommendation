@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Prediction{% endblock title %}</title>
+{% block content %}
+    <div class="text-center">
+        <h3>Prediction History</h3>
+    </div>
+
+    <table class = "table">
+        <thead class = "table-success"> 
+            <tr>
+                <th>Prediction Date</th>
+                <th>N</th>
+                <th>P</th>
+                <th>K</th>
+                <th>Temprature</th>
+                <th>Humidity</th>
+                <th>pH</th>
+                <th>Rainfall</th>
+                <th>Crop</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in prediction %}
+                <tr>
+                <td>{{p.created_at}}</td>
+                <td>{{p.N}}</td>
+                <td>{{p.P}}</td>
+                <td>{{p.K}}</td>
+                <td>{{p.temperature}}</td>
+                <td>{{p.humidity}}</td>
+                <td>{{p.ph}}</td>
+                <td>{{p.rainfall}}</td>
+                <td>{{p.predicted_label}}</td>
+                <td><a href="{% url 'delete_entry-view' p.id %}" class="btn btn-outline-danger" onclick = "return confirm('Are You Sure, You want to delete this entry ? This cannot be undone!')">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock content %}

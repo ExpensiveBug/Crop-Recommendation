@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Login{% endblock title %}</title>
+
+{% block content %}
+    <div class="row justify-content-center m-4">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0 overflow-hidden">
+                <div class="row">
+                    <div class="col-md-6" style="background: url('{% static "images/login.png" %}') no-repeat center center / cover; height:460px;">  
+                    </div>
+                    <div class="col-md-6 bg-white">
+                        <div class="p-5">
+                            <h3><i class="mb-3 fa-solid fa-user-plus"></i> User Login</h3>
+                            <form method = "post" id="loginform">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="mail" id="email" placeholder = "you@example.com" class="form-control">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="pwd2">Password<span class ="text-muted small">(min 6 characters) </span> </label>
+                                        <input type="password" name="password" id="pwd2" class="form-control" placeholder = "******">
+                                    </div>
+                                </div> 
+                                <button class ="btn btn-success mt-3 w-100" type="submit" id="signupbtn">
+                                    <span>Login Account</span>
+                                </button>
+                                <div class="text-center mt-3 ">
+                                    <span class="text muted small">Don't have an account ?</span>
+                                    <a href="{% url 'signup-view' %}" class="small text-decoration-none ms-1"> SignUp</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>               
+        </div>
+    </div>
+{% endblock content %}

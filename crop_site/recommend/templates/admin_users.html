@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+<title>{% block title %}Registered users{% endblock title %}</title>
+{% block content %}
+    <div class="text-center">
+        <h3><i class="fa-solid fa-users"></i> Registered Users</h3>
+    </div>
+
+    <table class = "table table-striped table-hover">
+        <thead class = "table-success"> 
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for u in users %}
+                <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{u.get_full_name}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.userprofile.phone}}</td>
+
+                <td><a href="{% url 'delete-user-view' u.id %}" class="btn btn-outline-danger" onclick = "return confirm('Are You Sure, You want to delete the user ? This cannot be undone!')"><i class="fa-solid fa-trash"></i></a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock content %}
