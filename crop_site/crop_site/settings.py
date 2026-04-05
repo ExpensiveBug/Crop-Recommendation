@@ -80,15 +80,13 @@ WSGI_APPLICATION = 'crop_site.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+import dj_database_url
+import os
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql', 
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'wvDsCsqxePZgeMlLlZiYVRBRBbFpetXL',
-        'HOST': 'postgres.railway.internal',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 # DATABASES = {
 #     'default': {
