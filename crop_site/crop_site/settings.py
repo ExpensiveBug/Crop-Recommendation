@@ -81,14 +81,15 @@ WSGI_APPLICATION = 'crop_site.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': 'django.db.backends.postgresql',
-    'NAME' : 'railway',
-    'USER' : 'postgres',
-    'PASSWORD' : 'wvDsCsqxePZgeMlLlZiYVRBRBbFpetXL',
-    'HOST' : 'postgres.railway.internal',
-    'PORT' : '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql', 
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'wvDsCsqxePZgeMlLlZiYVRBRBbFpetXL',
+        'HOST': 'postgres.railway.internal',
+        'PORT': '5432',
+    }
 }
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
