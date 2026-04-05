@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "crop_site/wsgi.py",
@@ -6,10 +7,6 @@
     }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "crop_site/wsgi.py"
