@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 #     SECRET_KEY =  f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['.vercel.app', 'now.sh', 'localhost', '127.0.0.1']
@@ -79,13 +79,14 @@ WSGI_APPLICATION = 'crop_site.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-import dj_database_url
-from decouple import config
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}")
-    )
+    'default': 'django.db.backends.postgresql',
+    'NAME' : 'railway',
+    'USER' : 'postgres',
+    'PASSWORD' : 'wvDsCsqxePZgeMlLlZiYVRBRBbFpetXL',
+    'HOST' : 'postgres.railway.internal',
+    'PORT' : '5432',
 }
 
 # DATABASES = {
