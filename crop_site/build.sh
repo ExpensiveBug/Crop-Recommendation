@@ -1,15 +1,17 @@
 #!/bin/bash
 
-# Exit immediately if a command exits with a non-zero status
-set -e
+echo "===> Starting Build Process"
 
-echo "Installing requirements..."
-pip install -r requirements.txt
+# Install requirements
+echo "===> Installing Requirements..."
+pip install -r requirements.txt || { echo "Pip install failed"; exit 1; }
 
-echo "Collecting static files..."
-python3 manage.py collectstatic --noinput
+# Collect Static
+echo "===> Collecting Static Files..."
+python3 manage.py collectstatic --noinput || { echo "Collectstatic failed"; exit 1; }
 
-echo "Running migrations..."
-python3 manage.py migrate --noinput
+# Migrations
+echo "===> Running Migrations..."
+python3 manage.py migrate --noinput || { echo "Migrations failed"; exit 1; }
 
-echo "Build finished successfully!"
+echo "===> Build Finished Successfully!"
