@@ -1,17 +1,16 @@
 #!/bin/bash
 
-echo "===> Starting Build Process"
+# Exit on error
+set -e
 
-# Install requirements
 echo "===> Installing Requirements..."
-pip install -r requirements.txt || { echo "Pip install failed"; exit 1; }
+# Force install using the new flag
+pip install -r requirements.txt --break-system-packages
 
-# Collect Static
 echo "===> Collecting Static Files..."
-python3 manage.py collectstatic --noinput || { echo "Collectstatic failed"; exit 1; }
+python3 manage.py collectstatic --noinput
 
-# Migrations
 echo "===> Running Migrations..."
-python3 manage.py migrate --noinput || { echo "Migrations failed"; exit 1; }
+python3 manage.py migrate --noinput
 
-echo "===> Build Finished Successfully!"
+echo "===> Build Completed!"
