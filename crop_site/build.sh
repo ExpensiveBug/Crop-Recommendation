@@ -20,13 +20,12 @@ User = get_user_model()
 username = os.getenv('ADMIN_USERNAME')
 password = os.getenv('ADMIN_PASSWORD')
 if username and password:
-    if not User.objects.filter(username=username).exists():
-        User.objects.create_superuser(username, 'admin@example.com', password)
-        print(f'Superuser {username} created successfully!')
-    else:
-        print(f'Superuser {username} already exists.')
-else:
-    print('Admin credentials not found in environment variables.')
+    u, created = User.objects.get_or_create(username=username)
+    u.set_password(password) 
+    u.is_superuser = True
+    u.is_staff = True
+    u.save()
+    print(f'Superuser {username} updated/created successfully!')
 "
 
 echo "===> Build Completed!"
