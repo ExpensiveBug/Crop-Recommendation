@@ -1,4 +1,15 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+echo "Installing requirements..."
 pip install -r requirements.txt
-python manage.py makemigrations --noinput
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput
+
+echo "Collecting static files..."
+python3 manage.py collectstatic --noinput
+
+echo "Running migrations..."
+python3 manage.py migrate --noinput
+
+echo "Build finished successfully!"
