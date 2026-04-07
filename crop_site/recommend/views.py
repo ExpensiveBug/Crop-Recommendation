@@ -183,13 +183,24 @@ def admin_login(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         user = authenticate(request, username = username, password = password)
-        
+        if not user:
+            env_user = os.getenv('ADMIN_USERNAME')
+            env_pass = os.getenv('ADMIN_PASSWORD')
+            if username == env_user and password == env_pass:
+                user, created = User.objects.get_or_create(username=username)
+                user.set_password(password)
+                user.is_staff = True
+                user.is_superuser = True
+                user.save()
+                user = authenticate(username=username, password=password)
+                
         if not user :
             messages.error(request, "Invalid Credentials !")
             return redirect("admin-login-view")
         if not user.is_staff:
             messages.error(request, "You are not authenticated as admin!")
             return redirect("admin-login-view")
+            
         login(request, user)
         messages.success(request, "Successfully Logedin as admin :)")
         return redirect("admin-dashboard-view")
