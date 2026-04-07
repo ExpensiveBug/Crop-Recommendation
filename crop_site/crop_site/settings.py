@@ -137,8 +137,8 @@ CSRF_COOKIE_SAMESITE = 'None'
 
 # Static files
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'recomend', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 LOGIN_URL = '/login/'
 
