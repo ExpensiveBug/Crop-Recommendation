@@ -132,10 +132,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://crop-recommendation-6nagfpwxl-jerrycode.vercel.app/',
     'https://*.vercel.app'
 ]
-
-# Cookie settings
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'
 
 # Static files
 STATIC_URL = 'static/'
