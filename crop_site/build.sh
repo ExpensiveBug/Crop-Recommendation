@@ -1,1 +1,16 @@
-pip install -r requirements.txt --break-system-packages && python3 manage.py migrate --noinput && python3 manage.py shell -c "import os; from django.contrib.auth import get_user_model; User = get_user_model(); username=os.getenv('ADMIN_USERNAME'); password=os.getenv('ADMIN_PASSWORD'); u, created = User.objects.get_or_create(username=username); u.set_password(password); u.is_superuser=True; u.is_staff=True; u.save(); print('===> ADMIN CREATED/UPDATED SUCCESSFULLY <===')" && python3 manage.py collectstatic --noinput
+#!/bin/bash
+set -e
+
+echo "===> Installing Requirements..."
+
+pip install -r requirements.txt --break-system-packages
+
+echo "===> Running Migrations..."
+
+python3 manage.py migrate --noinput
+
+echo "===> Collecting Static Files..."
+
+python3 manage.py collectstatic --noinput
+
+echo "===> Build Completed!"
